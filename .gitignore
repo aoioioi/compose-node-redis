@@ -1,0 +1,11 @@
+/node_modules
+.env
+/http
+test
+*.db
+
+# Uncomment following in GitHub production
+# .dockerignore
+# Dockerfile
+# *compose.yml
+# *compose.yaml

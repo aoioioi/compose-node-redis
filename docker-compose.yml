@@ -1,0 +1,51 @@
+name: node-redis-compose
+
+services:
+  web:
+    # Use Dockerfile to build
+    build: .
+    container_name: compose-node
+    # Overrides WORKDIR in Dockerfile
+    # working_dir: /app
+    # Overrides CMD in Dockerfile
+    # When command and CMD null, default command from image pulled is used
+    # command: npm run dev
+    # Set environment variables from compose
+    # Overrides Compose env_file attribute
+    environment:
+      - PORT=7000
+      - REDIS_PORT=6333
+      - DB_FILE_NAME=file:bikes.db
+    # Docker container port, additional to Dockerfile EXPOSE
+    # expose:
+    #   - "7000"
+    # Port mapping instead of docker run -p
+    # Must be a string
+    ports:
+      - "7001:7000"
+    tty: true
+    # Volumes persist data
+    volumes:
+      # Relative paths
+      - ./bikes.db:/etc/app-data/bikes.db
+    depends_on:
+      - redis
+  redis:
+    # Use a Docker Hub image
+    # image: redis:7-alpine
+    # Or build a custom image
+    build:
+      # Sets the base path to look from
+      # context: .
+      dockerfile: ./redis/redis.Dockerfile
+    container_name: compose-redis
+    # Start redis on a custom port
+    # command: redis-server --port 6333
+    # Use a config file declared in configs
+    # configs:
+    #   - custom_redis_config
+
+# Declare custom configs, if any
+# configs:
+#   custom_redis_config:
+#     file: ./custom-redis.conf
