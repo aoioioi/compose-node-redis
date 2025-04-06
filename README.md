@@ -14,4 +14,7 @@ docker compose up
 docker exec -it compose-node sh
 npm run db:push
 npm run db:seed
+
+# Copy db from container to local machine
+docker cp compose-node:/app/bikes.db ~/Downloads
 ```

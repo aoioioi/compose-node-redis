@@ -24,7 +24,7 @@ services:
     ports:
       - "7001:7000"
     tty: true
-    # Volumes persist data
+    # Volumes to persist local machine data to container
     volumes:
       # Relative paths
       - ./bikes.db:/etc/app-data/bikes.db
